@@ -1,0 +1,198 @@
+<app-header></app-header>
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-12">
+                    <section style="padding: 15px">
+                        <div>
+                            <div class="col-md-12">
+                                <div class="box box-info">
+                                    <div class="box-header with-border animated
+                                        bounceIn" style="text-align:center;">
+                                        <h1>Claim Winners</h1>
+                                    </div>
+                                    <div class="table-responsive no-padding">
+                                        <table class="mr-table mr-table_bg
+                                            mr-table_evenly">
+                                            <tbody class="mr-table__tbody">
+                                                <tr class="mr-table__tr">
+                                                    <td class="mr-table__td">
+                                                        Top Line : <code> {{
+                                                            topLineWinner ==
+                                                            null ?
+                                                            '--------' :
+                                                            topLineWinner
+                                                            }} </code>
+                                                    </td>
+                                                </tr>
+                                                <tr class="mr-table__tr">
+                                                    <td class="mr-table__td">
+                                                        Middle Line : <code> {{
+                                                            middleLineWinner ==
+                                                            null ?
+                                                            '--------' :
+                                                            middleLineWinner }}
+                                                        </code>
+                                                    </td>
+                                                </tr>
+                                                <tr class="mr-table__tr">
+                                                    <td class="mr-table__td">
+                                                        Last Line : <code> {{
+                                                            lastLineWinner ==
+                                                            null ?
+                                                            '--------' :
+                                                            lastLineWinner
+                                                            }} </code>
+                                                    </td>
+                                                </tr>
+                                                <tr class="mr-table__tr">
+                                                    <td class="mr-table__td">
+                                                        Full Housie : <code> {{
+                                                            fullHousieWinner ==
+                                                            null ?
+                                                            '--------' :
+                                                            fullHousieWinner }}
+                                                        </code>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="box-header with-border"
+                                        style="text-align:center;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <section style="padding: 15px">
+                        <div class="">
+                            <div class="col-md-12">
+                                <div class="box box-info">
+                                    <div class="box-header with-border animated
+                                        bounceIn" style="text-align:center;">
+                                        <h1>Lucky Winner</h1>
+                                    </div>
+                                    <div class="table-responsive no-padding">
+                                        <table class="mr-table mr-table_bg
+                                            mr-table_evenly">
+                                            <tbody class="mr-table__tbody">
+                                                <tr class="mr-table__tr">
+                                                    <td class="mr-table__td"
+                                                        style="text-align:
+                                                        center">
+                                                        <code>{{ luckyWinner ==
+                                                            null?
+                                                            '--------':luckyWinner
+                                                            }}</code>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="box-header with-border"
+                                        style="text-align:center;">
+                                        <button *ngIf="randomWinner"
+                                            mat-raised-button
+                                            color="warn"
+                                            (click)="getLuckyWinner()">
+                                            Select Random Winner
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <section class="content">
+                <div class="">
+                    <div class="col-md-12">
+                        <div class="box box-info">
+                            <div class="box-header with-border animated
+                                bounceIn" style="text-align:center;">
+                                <!-- <h1>{{value}}</h1> -->
+                                <div class="numberCallBlock" *ngIf="value != null">
+                                    <h1 class="numberCall">{{value}}</h1>
+                                </div>
+                                <h1 *ngIf="checklist.length == 90">All numbers
+                                        are marked</h1>
+                            </div>
+                            <div class="table-responsive no-padding">
+                                <table class="mr-table mr-table_bg
+                                    mr-table_evenly">
+                                    <tbody class="mr-table__tbody">
+                                        <ng-container *ngFor="let items of
+                                            row.slice(0, 10); let index=
+                                            index;">
+                                            <tr class="mr-table__tr">
+                                                <td class="mr-table__td"
+                                                    *ngFor="let item of
+                                                    slist.slice(0, 10); let i=
+                                                    index;" style="text-align:
+                                                    center;">
+                                                    <!-- [disabled]="slist[(index
+                                                    * 10) +
+                                                    i].isdisabled" -->
+                                                    <div
+                                                        class="mr-table__value">
+                                                        <input name="point"
+                                                            [disabled]="true"
+                                                            [class.green]="slist[(index
+                                                            * 10) +
+                                                            i].isdisabled"
+                                                            [(ngModel)]="slist[(index
+                                                            * 10) + i].num"
+                                                            style="text-align:
+                                                            center !important;
+                                                            width: 30px
+                                                            !important; height:
+                                                            30px !important;
+                                                            border-radius: 50%
+                                                            !important;">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </ng-container>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="box-header with-border" *ngIf="checklist.length != 90 || fullHousieWinner == null"
+                                style="text-align:center;">
+                                <button mat-mini-fab color="primary"
+                                    class="example-tooltip-host"
+                                    matTooltip="Play"
+                                    [matTooltipPosition]="position"
+                                    (click)="startTimer()"
+                                    [disabled]="playDisabled">
+                                    <mat-icon aria-label="play">play_arrow</mat-icon>
+                                </button>
+                                &nbsp;
+                                <button mat-mini-fab color="warn"
+                                    class="example-tooltip-host"
+                                    matTooltip="Pause"
+                                    [matTooltipPosition]="position"
+                                    (click)="pauseTimer()"
+                                    [disabled]="!playDisabled">
+                                    <mat-icon aria-label="pause">pause</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <ng2-toasty></ng2-toasty>
+        </div>
+    </div>
+</div>
+<div class="my-container">
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+</div>
+<app-footer></app-footer>

@@ -1,0 +1,85 @@
+<app-header></app-header>
+<div class="content-wrapper">
+    <section class="content-header">
+        <h1>
+            Player
+            <small>Details</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a [routerLink]="['/home']"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a [routerLink]="['/playerview']">Player</a></li>
+            <li class="active">Details</li>
+        </ol>
+    </section>
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                      Player
+                    </div>
+                    <div class="box-body">
+        <form #myRatingForm="ngForm" (ngSubmit)="onSubmit()" ngNativeValidate>
+          <div class="col-md-12">
+              <div class="box-body">
+                  <div class="col-md-3">
+                      <div class="form-group">
+                          <mat-form-field class="example-full-width">
+                              <input required matInput placeholder="Player Name" name="player-name" [(ngModel)]="Player.name"  required [disabled]="Isdisabled" >
+                          </mat-form-field>
+                      </div>
+                  </div>
+                  <div class="col-md-3">
+                      <div class="form-group">
+                          <mat-form-field class="example-full-width">
+                              <input required matInput placeholder="Mobile Number" name="mobile" [(ngModel)]="Player.mobileNumber"  required [disabled]="Isdisabled" >
+                          </mat-form-field>
+                      </div>
+                  </div>
+                  <div class="col-md-3">
+                      <div class="form-group">
+                            <mat-form-field class="example-full-width">
+                                <input required matInput placeholder="Email Address" pattern="[a-z0-9!#$%&'*+/=?^_`{|}~.-]+@[a-z0-9-]+(\.[a-z0-9-]+)" type="email" name="emailId" [(ngModel)]="Player.email"  required [disabled]="Isdisabled" >
+                            </mat-form-field>
+                            <div *ngIf="model.errors && model.touched">
+                                <div *ngIf="model.errors.required" style="color:red">
+                                    Email is <strong>required</strong>
+                                </div>
+                                <div *ngIf="model.errors.pattern" style="color:red">
+                                    Please enter a valid email address
+                                </div>
+                            </div>
+                      </div>
+                  </div>
+                  <div class="col-md-3">
+                      <div class="form-group">
+                          <mat-form-field class="example-full-width">
+                              <input required matInput placeholder="Password" type="password" name="password" [(ngModel)]="Player.passwordHash"  required [disabled]="Isdisabled" >
+                          </mat-form-field>
+                      </div>
+                  </div>
+                  <div class="col-md-3">
+                      <div class="form-group">
+                          <mat-form-field class="example-full-width">
+                              <textarea required matInput placeholder="Address" name="address" [(ngModel)]="Player.address" matTextareaAutosize matAutosizeMinRows="5" matAutosizeMaxRows="7" required [disabled]="Isdisabled" ></textarea>
+                          </mat-form-field>
+                      </div>
+                  </div>
+
+              </div>
+              <div class="box-footer">
+                  <button type="submit" required [disabled]="!myRatingForm.form.valid || Isdisabled" class="btn btn-primary pull-right md-raised md-primary" mat-raised-button color="primary">Save</button>
+                  <ng2-toasty></ng2-toasty>
+              </div>
+          </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+</section>
+</div>
+<div class="my-container">
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+</div>
+<app-footer></app-footer>

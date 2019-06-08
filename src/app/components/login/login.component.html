@@ -1,0 +1,38 @@
+<div class="container">
+  <form (ngSubmit)="onLoginSubmit()" #myForm="ngForm" ngNativeValidate>
+      <div id="login-box">
+          <div class="logo">
+              <img src="/assets/dist/img/user9-128x128.png" class="img img-responsive img-circle center-block" />
+              <h1 class="logo-caption"><span class="tweak">Tumbola</span> <span>Game</span>Admin<br><span class="tweak">Panel</span></h1>
+
+          </div><!-- /.logo -->
+          <div class="controls">
+              
+              <input type="text" name="emailId" [(ngModel)]="LoginModel.EmailId" #model="ngModel" pattern="[a-z0-9!#$%&'*+/=?^_`{|}~.-]+@[a-z0-9-]+(\.[a-z0-9-]+)*|[0-9 -()+]+$" placeholder="Email Id or Mobile Number" id="email" class="form-control" required />
+              <div *ngIf="model.errors && model.touched">
+                  <div *ngIf="model.errors.required" style="color:red">
+                      Email or Phone is <strong>required</strong>
+                  </div>
+                  <div *ngIf="model.errors.pattern" style="color:red">
+                      Please enter a valid email address or mobile number
+                  </div>
+              </div>
+                  <input type="password" name="Password" [(ngModel)]="LoginModel.Password" placeholder="Password" class="form-control" required />
+
+                  <button type="submit" class="btn btn-default btn-block btn-custom" [disabled]="!myForm.valid || Isdisabled">Login</button>
+                  <ng2-toasty></ng2-toasty>
+</div><!-- /.controls -->
+          
+      </div>
+      
+  </form>
+
+</div>
+<!-- /.container -->
+<div class="my-container">
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+</div>
+
+<!--Get Partical Effect With this-->
+<!-- <div id="particles-js"></div>
+<script src="assets/dist/js/effect.js"></script> -->

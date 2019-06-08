@@ -1,0 +1,282 @@
+<app-header></app-header>
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1>
+      Match
+      <small>Details</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li>
+        <a [routerLink]="['/home']"><i class="fa fa-dashboard"></i> Home</a>
+      </li>
+      <li><a [routerLink]="['/matchview']">Match</a></li>
+      <li class="active">Details</li>
+    </ol>
+  </section>
+  <section class="content">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="box box-info">
+          <mat-tab-group dynamicHeight [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
+            <mat-tab label="Match Info">
+              <div class="box-body">
+                <form
+                  #myRatingForm="ngForm"
+                  (ngSubmit)="onSubmit()"
+                  ngNativeValidate
+                >
+                  <div class="col-md-12">
+                    <div class="box-body">
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <mat-form-field class="example-full-width">
+                            <input
+                              required
+                              matInput
+                              placeholder="Match Title"
+                              name="title"
+                              [(ngModel)]="Match.title"
+                              [disabled]="Isdisabled"
+                            />
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <mat-form-field class="example-full-width">
+                            <textarea
+                              required
+                              matInput
+                              placeholder="Match Description"
+                              name="description"
+                              [(ngModel)]="Match.description"
+                              matTextareaAutosize
+                              matAutosizeMinRows="5"
+                              matAutosizeMaxRows="7"
+                              [disabled]="Isdisabled"
+                            ></textarea>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <mat-form-field class="example-full-width">
+                            <input
+                              required
+                              matInput
+                              placeholder="Match Date-Time"
+                              name="matchtime"
+                              [disabled]="Isdisabled"
+                              [(ngModel)]="Match.matchDateTime"
+                              [owlDateTimeTrigger]="dtPicker1"
+                              [owlDateTime]="dtPicker1"
+                            />
+                            <owl-date-time
+                              [pickerMode]="'dialog'"
+                              #dtPicker1
+                            ></owl-date-time>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <mat-checkbox
+                            class="example-margin"
+                            name="IsActive"
+                            [(ngModel)]="Match.isActive"
+                            [disabled]="Isdisabled"
+                            >Is Active</mat-checkbox
+                          >
+                        </div>
+                      </div>
+                    </div>
+                    <div class="box-footer">
+                      <button
+                        type="submit"
+                        [disabled]="!myRatingForm.form.valid || Isdisabled"
+                        class="btn btn-primary pull-right md-raised md-primary"
+                        mat-raised-button
+                        color="primary"
+                      >
+                        Save
+                      </button>
+                      <ng2-toasty></ng2-toasty>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </mat-tab>
+            <mat-tab label="Prize Info">
+              <div class="box-body">
+                <div class="col-md-12">
+                  <div class="table-responsive no-padding">
+                    <table class="mr-table mr-table_bg mr-table_evenly">
+                      <thead class="mr-table__thead">
+                        <tr class="mr-table__head">
+                          <th class="mr-table__th">Display Position</th>
+                          <th class="mr-table__th">Upload Action</th>
+                          <th class="mr-table__th">Preview Image</th>
+                          <th class="mr-table__th">Upload Image</th>
+                        </tr>
+                      </thead>
+                      <tbody class="mr-table__tbody">
+                        <tr class="mr-table__tr">
+                          <td class="mr-table__td">
+                            <span class="mr-table__mobile-caption"
+                              >Display Position</span
+                            >
+                            <div class="mr-table__value">1 (Top Line)</div>
+                          </td>
+                          <td class="mr-table__td">
+                            <span class="mr-table__mobile-caption"
+                              >Upload Action</span
+                            >
+                            <div class="mr-table__value">
+                              <input
+                                type="file"
+                                (change)="onSelectFile($event, 1)"
+                              />
+                            </div>
+                          </td>
+                          <td class="mr-table__td">
+                            <span class="mr-table__mobile-caption"
+                              >Preview Image</span
+                            >
+                            <div class="mr-table__value" >
+                              <img [src]="img1" height="100"/>
+                            </div>
+                          </td>
+                          <td>   
+                            <div class="mr-table__value" *ngIf = "MatchPriceRel.length >=  1 && MatchPriceRel[0].displayPosition == 1">
+                              <img src ="{{ImgUrl }}/{{MatchPriceRel[0].fileName}}" height="100"/>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr class="mr-table__tr">
+                          <td class="mr-table__td">
+                            <span class="mr-table__mobile-caption"
+                              >Display Position</span
+                            >
+                            <div class="mr-table__value">2 (Middle Line)</div>
+                          </td>
+                          <td class="mr-table__td">
+                            <span class="mr-table__mobile-caption"
+                              >Upload Action</span
+                            >
+                            <div class="mr-table__value">
+                              <input
+                                type="file"
+                                (change)="onSelectFile($event, 2)"
+                              />
+                            </div>
+                          </td>
+                          <td class="mr-table__td">
+                            <span class="mr-table__mobile-caption"
+                              >Preview Image</span
+                            >
+                            <div class="mr-table__value" >
+                              <img [src]="img2" height="100" />
+                            </div>
+                          </td>
+                          <td>   
+                            <div class="mr-table__value" *ngIf = "MatchPriceRel.length >=  2 && MatchPriceRel[1].displayPosition == 2">
+                              <img src ="{{ImgUrl }}/{{MatchPriceRel[1].fileName}}" height="100"/>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr class="mr-table__tr">
+                          <td class="mr-table__td">
+                            <span class="mr-table__mobile-caption"
+                              >Display Position</span
+                            >
+                            <div class="mr-table__value">3 (Bottom Line)</div>
+                          </td>
+                          <td class="mr-table__td">
+                            <span class="mr-table__mobile-caption"
+                              >Upload Action</span
+                            >
+                            <div class="mr-table__value">
+                              <input
+                                type="file"
+                                (change)="onSelectFile($event, 3)"
+                              />
+                            </div>
+                          </td>
+                          <td class="mr-table__td">
+                            <span class="mr-table__mobile-caption"
+                              >Preview Image</span
+                            >
+                            <div class="mr-table__value" >
+                              <img [src]="img3" height="100" />
+                            </div>
+                          </td>
+                          <td>   
+                            <div class="mr-table__value" *ngIf = "MatchPriceRel.length >=  3 && MatchPriceRel[2].displayPosition == 3">
+                              <img src ="{{ImgUrl }}/{{MatchPriceRel[2].fileName}}" height="100"/>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr class="mr-table__tr">
+                          <td class="mr-table__td">
+                            <span class="mr-table__mobile-caption"
+                              >Display Position</span
+                            >
+                            <div class="mr-table__value">4 (Full Housie)</div>
+                          </td>
+                          <td class="mr-table__td">
+                            <span class="mr-table__mobile-caption"
+                              >Upload Action</span
+                            >
+                            <div class="mr-table__value">
+                              <input
+                                type="file"
+                                (change)="onSelectFile($event, 4)"
+                              />
+                            </div>
+                          </td>
+                          <td class="mr-table__td">
+                            <span class="mr-table__mobile-caption"
+                              >Preview Image</span
+                            >
+                            <div class="mr-table__value" >
+                              <img [src]="img4" height="100" />
+                            </div>
+                          </td>
+                          <td>  
+                            <div class="mr-table__value" *ngIf = "MatchPriceRel.length ==  4 && MatchPriceRel[3].displayPosition == 4">
+                              <img src ="{{ImgUrl }}/{{MatchPriceRel[3].fileName}}" height="100"/>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="box-footer">
+                <button
+                  type="button"
+                  (click)="onPrizeRelSubmit()"
+                  [disabled]="Isdisabled"
+                  class="btn btn-primary pull-right md-raised md-primary"
+                  mat-raised-button
+                  color="primary"
+                >
+                  Save
+                </button>
+                <ng2-toasty></ng2-toasty>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<div class="my-container">
+  <ngx-loading
+    [show]="loading"
+    [config]="{ backdropBorderRadius: '14px' }"
+  ></ngx-loading>
+</div>
+<app-footer></app-footer>

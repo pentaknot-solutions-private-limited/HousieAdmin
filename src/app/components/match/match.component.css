@@ -1,0 +1,43 @@
+.green {
+    background-color: green;
+    color: #fff;
+   }
+
+/* -------------------------------- 
+xclip 
+-------------------------------- */
+
+
+/*------------------------*/
+
+.fullHousie {
+    width: 300px !important; 
+    height: 300px !important;
+}
+.fullHousieImg {
+    left: 30% !important;
+}
+
+@media screen and (max-width:1124px) {
+    .fullHousie {
+        width: 200px !important; 
+        height: 200px !important;
+    }
+    .fullHousieImg {
+        left: 35% !important;
+    }
+}
+
+.numberCallBlock {
+    border: 3px solid;
+    padding: 12px;
+    display: inline-block;
+    border-radius: 56px;
+}
+
+.numberCall {
+    font-size: 83px !important;
+    margin: 0px !important;
+}
+
+  

@@ -1,0 +1,167 @@
+
+<app-header></app-header>
+<div class="content-wrapper">
+    <section class="content-header">
+        <h1>
+          Match
+          <small>Summary</small>
+        </h1>
+        <ol class="breadcrumb">
+          <li>
+            <a [routerLink]="['/home']"><i class="fa fa-dashboard"></i> Home</a>
+          </li>
+          <li><a>Match</a></li>
+          <li class="active">Summary</li>
+        </ol>
+      </section>
+      <section class="content">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="box box-info">
+              <div class="box-header with-border">
+                Match Summary
+              </div>
+              <div class="box-body">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="box box-widget widget-user" style="height: 464px">
+                                <!-- Add the bg color to the header using any of the bg-* classes -->
+                                <div class="widget-user-header bg-aqua-active" style="height: 335px">
+                                  
+                                </div>
+                                <div class="widget-user-image fullHousieImg" *ngIf="FullHousie.prizeFile == null">
+                                  <img class="img-circle fullHousie" src="../../../assets/dist/img/noImg.png" alt="User Avatar">
+                                </div>
+                                <div class="widget-user-image fullHousieImg" *ngIf="FullHousie.prizeFile != null">
+                                    <img class="img-circle fullHousie" src="{{ ImgUrl }}/{{ FullHousie.prizeFile }}" alt="User Avatar">
+                                  </div>
+                                <div class="box-footer">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <h3 class="widget-user-username">{{ FullHousie.playerName }}</h3>
+                                            <h5 class="widget-user-desc">Full Housie</h5>
+                                            <div *ngIf="FullHousie.expired != null">
+                                                <h6 style="position: relative; left: 2%; top: -6%" *ngIf="FullHousie.empty">Status : <code>Not Filled</code></h6>
+                                                <h6 style="position: relative; left: 2%; top: -6%" *ngIf="FullHousie.expired">Status : <code>Not Updated</code></h6>
+                                                <h6 style="position: relative; left: 2%; top: -6%" *ngIf="!FullHousie.empty && !FullHousie.expired">Status : <code>Confirmed</code></h6>
+                                            </div>
+                                            <div *ngIf="FullHousie.expired == null">
+                                              No Winner
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                              </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="box box-widget widget-user-2">
+                                    <!-- Add the bg color to the header using any of the bg-* classes -->
+                                    <div class="widget-user-header bg-yellow" style="height: 100px">
+                                      <div class="widget-user-image" *ngIf="FirstLine.prizeFile == null">
+                                        <img class="img-circle" style="width: 50px; height: 50px;" src="../../../assets/dist/img/noImg.png" alt="User Avatar">
+                                      </div>
+                                      <div class="widget-user-image" *ngIf="FirstLine.prizeFile != null">
+                                          <img class="img-circle" style="width: 50px; height: 50px;" src="{{ ImgUrl }}/{{ FirstLine.prizeFile }}" alt="User Avatar">
+                                        </div>
+                                      <!-- /.widget-user-image -->
+                                      <h3 class="widget-user-username">{{ FirstLine.playerName }}</h3>
+                                      <h5 class="widget-user-desc">First Line</h5>
+                                      <div *ngIf="FirstLine.expired != null">
+                                          <h6 style="position: relative; left: 2%; top: -6%" *ngIf="FirstLine.empty">Status : <code>Not Filled</code></h6>
+                                                <h6 style="position: relative; left: 2%; top: -6%" *ngIf="FirstLine.expired">Status : <code>Not Updated</code></h6>
+                                                <h6 style="position: relative; left: 2%; top: -6%" *ngIf="!FirstLine.empty && !FirstLine.expired">Status : <code>Confirmed</code></h6>
+                                      </div>
+                                      <div style="position: relative; left: 2%; top: -6%" *ngIf="FirstLine.expired == null">
+                                        No Winner
+                                      </div>
+                                    </div>
+                                  </div>
+                            </div>
+                            <div class="row">
+                                <div class="box box-widget widget-user-2">
+                                    <!-- Add the bg color to the header using any of the bg-* classes -->
+                                    <div class="widget-user-header bg-green" style="height: 100px">
+                                        <div class="widget-user-image" *ngIf="SecondLine.prizeFile == null">
+                                            <img class="img-circle" style="width: 50px; height: 50px;" src="../../../assets/dist/img/noImg.png" alt="User Avatar">
+                                          </div>
+                                          <div class="widget-user-image" *ngIf="SecondLine.prizeFile != null">
+                                              <img class="img-circle" style="width: 50px; height: 50px;" src="{{ ImgUrl }}/{{ SecondLine.prizeFile }}" alt="User Avatar">
+                                            </div>
+                                      <!-- /.widget-user-image -->
+                                      <h3 class="widget-user-username">{{ SecondLine.playerName }}</h3>
+                                      <h5 class="widget-user-desc">Second Line</h5>
+                                      <div *ngIf="SecondLine.expired != null">
+                                          <h6 style="position: relative; left: 2%; top: -6%" *ngIf="SecondLine.empty">Status : <code>Not Filled</code></h6>
+                                                <h6 style="position: relative; left: 2%; top: -6%" *ngIf="SecondLine.expired">Status : <code>Not Updated</code></h6>
+                                                <h6 style="position: relative; left: 2%; top: -6%" *ngIf="!SecondLine.empty && !SecondLine.expired">Status : <code>Confirmed</code></h6>
+                                      </div>
+                                      <div style="position: relative; left: 2%; top: -6%" *ngIf="SecondLine.expired == null">
+                                        No Winner
+                                      </div>
+                                    </div>
+                                  </div>
+                            </div>
+                            <div class="row">
+                                <div class="box box-widget widget-user-2">
+                                    <!-- Add the bg color to the header using any of the bg-* classes -->
+                                    <div class="widget-user-header bg-fuchsia" style="height: 100px">
+                                        <div class="widget-user-image" *ngIf="ThirdLine.prizeFile == null">
+                                            <img class="img-circle" style="width: 50px; height: 50px;" src="../../../assets/dist/img/noImg.png" alt="User Avatar">
+                                          </div>
+                                          <div class="widget-user-image" *ngIf="ThirdLine.prizeFile != null">
+                                              <img class="img-circle" style="width: 50px; height: 50px;" src="{{ ImgUrl }}/{{ ThirdLine.prizeFile }}" alt="User Avatar">
+                                            </div>
+                                      <!-- /.widget-user-image -->
+                                      <h3 class="widget-user-username"> {{ ThirdLine.playerName }}</h3>
+                                      <h5 class="widget-user-desc">Third Line</h5>
+                                      <div *ngIf="ThirdLine.expired != null">
+                                          <h6 style="position: relative; left: 2%; top: -6%" *ngIf="ThirdLine.empty">Status : <code>Not Filled</code></h6>
+                                                <h6 style="position: relative; left: 2%; top: -6%" *ngIf="ThirdLine.expired">Status : <code>Not Updated</code></h6>
+                                                <h6 style="position: relative; left: 2%; top: -6%" *ngIf="!ThirdLine.empty && !ThirdLine.expired">Status : <code>Confirmed</code></h6>
+                                      </div>
+                                      <div style="position: relative; left: 2%; top: -6%" *ngIf="ThirdLine.expired == null">
+                                        No Winner
+                                      </div>
+                                    </div>
+                                  </div>
+                            </div>
+                            <div class="row">
+                                <div class="box box-widget widget-user-2">
+                                    <!-- Add the bg color to the header using any of the bg-* classes -->
+                                    <div class="widget-user-header bg-gray" style="height: 100px">
+                                        <div class="widget-user-image" *ngIf="Lucky.prizeFile == null">
+                                            <img class="img-circle" style="width: 50px; height: 50px;" src="../../../assets/dist/img/noImg.png" alt="User Avatar">
+                                          </div>
+                                          <div class="widget-user-image" *ngIf="Lucky.prizeFile != null">
+                                              <img class="img-circle" style="width: 50px; height: 50px;" src="{{ ImgUrl }}/{{ Lucky.prizeFile }}" alt="User Avatar">
+                                            </div>
+                                      <!-- /.widget-user-image -->
+                                      <h3 class="widget-user-username">{{ Lucky.playerName }}</h3>
+                                      <h5 class="widget-user-desc">Lucky Winner</h5>
+                                      <div *ngIf="Lucky.expired != null">
+                                          <h6 style="position: relative; left: 2%; top: -6%" *ngIf="Lucky.empty">Status : <code>Not Filled</code></h6>
+                                                <h6 style="position: relative; left: 2%; top: -6%" *ngIf="Lucky.expired">Status : <code>Not Updated</code></h6>
+                                                <h6 style="position: relative; left: 2%; top: -6%" *ngIf="!Lucky.empty && !Lucky.expired">Status : <code>Confirmed</code></h6>
+                                      </div>
+                                      <div style="position: relative; left: 2%; top: -6%" *ngIf="Lucky.expired == null">
+                                        No Winner
+                                      </div>
+                                    </div>
+                                  </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+</div>
+<div class="my-container">
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+</div>
+<app-footer></app-footer>

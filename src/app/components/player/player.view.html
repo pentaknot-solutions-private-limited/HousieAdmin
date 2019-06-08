@@ -1,0 +1,90 @@
+
+<app-header></app-header>
+<div class="content-wrapper">
+    <section class="content-header">
+        <h1>
+            Player
+            <small>List</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a [routerLink]="['/home']"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a >Player</a></li>
+            <li class="active">List</li>
+        </ol>
+    </section>
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        Player Details
+                    </div>
+                    <div class="box-body">
+                        <div class="col-md-12">
+                            <div class="table-responsive no-padding">
+                                <table class="mr-table mr-table_bg mr-table_evenly">
+                                    <thead class="mr-table__thead">
+                                        <tr class="mr-table__head">
+                                            <th class="mr-table__th">Sr. No</th>
+                                            <th class="mr-table__th">Player Name</th>
+                                            <th class="mr-table__th">Player Mobile</th>
+                                            <th class="mr-table__th">Player Email</th>
+
+                                            <th class="mr-table__th">Active</th>
+                                            <th class="mr-table__th">Action</th>
+
+
+                                        </tr>
+                                    </thead>
+                                    <tbody class="mr-table__tbody">
+                                        <tr class="mr-table__tr" *ngFor="let item of PlayerPageListObj.PlayerPageList| paginate: { itemsPerPage: PageSize, currentPage: p,totalItems:PlayerPageListObj.totalRecords };let i=index">
+                                            <td class="mr-table__td"><span class="mr-table__mobile-caption">Sr. No</span> <div class="mr-table__value">{{(i+1)+(p-1)*(PageSize)}}</div></td>
+                                            <td class="mr-table__td"><span class="mr-table__mobile-caption">Player Name</span> <div class="mr-table__value">{{item.name}}</div></td>
+                                            <td class="mr-table__td"><span class="mr-table__mobile-caption">Player Mobile</span> <div class="mr-table__value">{{item.mobileNumber}}</div></td>
+                                            <td class="mr-table__td"><span class="mr-table__mobile-caption">Player Email</span> <div class="mr-table__value">{{item.email}}</div></td>
+                                            <td class="mr-table__td"><span class="mr-table__mobile-caption">Active</span> <div class="mr-table__value">{{item.isActive}}</div></td>
+
+                                            <td class="mr-table__td">
+                                                <span class="mr-table__mobile-caption">Action</span>
+                                                <div>
+                                                    <button mat-mini-fab color="primary" class="example-tooltip-host" matTooltip="View" [matTooltipPosition]="position" [routerLink]="['/editplayer/', item.playerId, 'view']">
+
+                                                        <mat-icon aria-label="view">visibility</mat-icon>
+
+                                                    </button>
+                                                    <button mat-mini-fab color="accent" class="example-tooltip-host" matTooltip="Edit" [matTooltipPosition]="position" [routerLink]="['/editplayer/', item.playerId, 'edit']">
+                                                        <mat-icon aria-label="edit">mode_edit</mat-icon>
+                                                    </button>
+
+                                                    <button mat-mini-fab color="warn" class="example-tooltip-host" matTooltip="Delete" [matTooltipPosition]="position" (click)="openDialog(item.id, item.playerId)"> 
+                                                        <mat-icon aria-label="delete">delete</mat-icon>
+                                                    </button>
+                                                </div>
+                                                <ng2-toasty></ng2-toasty>
+                                            </td>
+
+
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+
+                        </div>
+                    </div>
+                    <div class="box-footer">
+                        <pagination-controls class="paginator" (pageChange)="pagechangevents(p = $event)"></pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<button mat-mini-fab class="example-tooltip-host pull-right fixedbutton" matTooltip="Add New Record" [matTooltipPosition]="position" [routerLink]="['/destination']">
+    <mat-icon aria-label="edit">add circle</mat-icon>
+</button>
+<div class="my-container">
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+</div>
+<app-footer></app-footer>

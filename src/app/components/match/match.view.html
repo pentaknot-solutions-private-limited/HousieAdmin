@@ -1,0 +1,183 @@
+<app-header></app-header>
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1>
+      Match
+      <small>List</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li>
+        <a [routerLink]="['/home']"><i class="fa fa-dashboard"></i> Home</a>
+      </li>
+      <li><a>Match</a></li>
+      <li class="active">List</li>
+    </ol>
+  </section>
+  <section class="content">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="box box-info">
+          <div class="box-header with-border">
+            Match Details
+          </div>
+          <div class="box-body">
+            <div class="col-md-12">
+              <div class="table-responsive no-padding">
+                <table class="mr-table mr-table_bg mr-table_evenly">
+                  <thead class="mr-table__thead">
+                    <tr class="mr-table__head">
+                      <th class="mr-table__th">Sr. No</th>
+                      <th class="mr-table__th">Match Title</th>
+                      <th class="mr-table__th">Match Description</th>
+                      <th class="mr-table__th">Match Date&Time</th>
+                      <th class="mr-table__th">Active</th>
+                      <th class="mr-table__th">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody class="mr-table__tbody">
+                    <tr
+                      class="mr-table__tr"
+                      *ngFor="
+                        let item of MatchPageListObj.MatchPageList
+                          | paginate
+                            : {
+                                itemsPerPage: PageSize,
+                                currentPage: p,
+                                totalItems: MatchPageListObj.totalRecords
+                              };
+                        let i = index
+                      "
+                    >
+                      <td class="mr-table__td">
+                        <span class="mr-table__mobile-caption">Sr. No</span>
+                        <div class="mr-table__value">
+                          {{ i + 1 + (p - 1) * PageSize }}
+                        </div>
+                      </td>
+                      <td class="mr-table__td">
+                        <span class="mr-table__mobile-caption"
+                          >Match Title</span
+                        >
+                        <div class="mr-table__value">{{ item.title }}</div>
+                      </td>
+                      <td class="mr-table__td">
+                        <span class="mr-table__mobile-caption"
+                          >Match Description</span
+                        >
+                        <div class="mr-table__value">
+                          {{ item.description }}
+                        </div>
+                      </td>
+                      <td class="mr-table__td">
+                        <span class="mr-table__mobile-caption"
+                          >Match Date&Time</span
+                        >
+                        <div class="mr-table__value">
+                          {{ item.matchDateTime | date: "short" }}
+                        </div>
+                      </td>
+                      <td class="mr-table__td">
+                        <span class="mr-table__mobile-caption">Active</span>
+                        <div class="mr-table__value">{{ item.isActive }}</div>
+                      </td>
+
+                      <td class="mr-table__td">
+                        <span class="mr-table__mobile-caption">Action</span>
+                        <div>
+                          <button
+                            mat-mini-fab
+                            color="primary"
+                            class="example-tooltip-host"
+                            matTooltip="View"
+                            [matTooltipPosition]="position"
+                            [routerLink]="['/editmatch/', item.matchId, 'view']"
+                          >
+                            <mat-icon aria-label="view">visibility</mat-icon>
+                          </button>
+                          <button
+                            mat-mini-fab
+                            color="accent"
+                            class="example-tooltip-host"
+                            matTooltip="Edit"
+                            [matTooltipPosition]="position"
+                            [routerLink]="['/editmatch/', item.matchId, 'edit']"
+                          >
+                            <mat-icon aria-label="edit">mode_edit</mat-icon>
+                          </button>
+                          <button
+                            mat-mini-fab
+                            color="primary"
+                            class="example-tooltip-host"
+                            matTooltip="Live Match"
+                            [matTooltipPosition]="position"
+                            [routerLink]="['/livematch/', item.matchId, 'live']"
+                          >
+                            <mat-icon aria-label="live">launch</mat-icon>
+                          </button>
+                          <button
+                            mat-mini-fab
+                            color="warn"
+                            class="example-tooltip-host"
+                            matTooltip="Delete"
+                            [matTooltipPosition]="position"
+                            (click)="openDialog(item.id, item.matchId)"
+                          >
+                            <mat-icon aria-label="delete">delete</mat-icon>
+                          </button>
+                          <button
+                            mat-mini-fab
+                            color="primary"
+                            class="example-tooltip-host"
+                            matTooltip="Copy Url"
+                            [matTooltipPosition]="position"
+                            (click)="getMatchUrl(item.matchId, item.matchToken)"
+                          >
+                            <mat-icon aria-label="view">file_copy</mat-icon>
+                          </button>
+                          <button
+                            mat-mini-fab
+                            color="accent"
+                            class="example-tooltip-host"
+                            matTooltip="Match Summary"
+                            [matTooltipPosition]="position"
+                            [routerLink]="['/summary/', item.matchId]"
+                          >
+                            <mat-icon aria-label="view">speaker_notes</mat-icon>
+                          </button>
+                        </div>
+                        <ng2-toasty></ng2-toasty>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="box-footer">
+            <pagination-controls
+              class="paginator"
+              (pageChange)="pagechangevents((p = $event))"
+            ></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<button
+  mat-mini-fab
+  class="example-tooltip-host pull-right fixedbutton"
+  matTooltip="Add New Record"
+  [matTooltipPosition]="position"
+  [routerLink]="['/match']"
+>
+  <mat-icon aria-label="edit">add circle</mat-icon>
+</button>
+<ng2-toasty></ng2-toasty>
+<div class="my-container">
+  <ngx-loading
+    [show]="loading"
+    [config]="{ backdropBorderRadius: '14px' }"
+  ></ngx-loading>
+</div>
+<app-footer></app-footer>
