@@ -45,6 +45,19 @@ export class MatchService {
             });
     }
 
+    public ExpireMatch(MatchId: string) {
+        const headers = new Headers({ 'Content-Type': 'application/json' });
+        const options = new RequestOptions({ headers: headers });
+        return this._http.get(this.apiUrl + 'MatchDetailsRel/expire/' + MatchId, options)
+            .map((response: Response) => <any>response.json())
+            .catch(response => {
+                if (response.status === 401) {
+                    this._Route.navigate(['Login']);
+                }
+                return response;
+            });
+    }
+
 
     public GetAllMatchDetails = (): Observable<any> => {
         const headers = new Headers({ 'Content-Type': 'application/json' });

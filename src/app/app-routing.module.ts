@@ -14,8 +14,9 @@ import { MatchSummaryComponent } from './components/match/match.summary';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'Login', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  // { path: '', redirectTo: 'Login', pathMatch: 'full' },
+  { path: '', redirectTo: 'match', pathMatch: 'full' },
+  // { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'match', component: MatchComponent, canActivate: [AuthGuard] },
   { path: 'matchview', component: MatchViewComponent, canActivate: [AuthGuard] },
   { path: 'editmatch/:ID/:Viewname', component: MatchComponent, canActivate: [AuthGuard] },

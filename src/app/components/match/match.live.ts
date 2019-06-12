@@ -44,6 +44,7 @@ export class MatchLiveComponent implements OnInit {
   lastLineWinner: string;
   fullHousieWinner: string;
   luckyWinner: string;
+  first: boolean;
 
   // tslint:disable-next-line:max-line-length
   constructor(private _router: Router, private _MatchService: MatchService, private _routeParams: ActivatedRoute, private toastyService: ToastyService, private toastyConfig: ToastyConfig) {
@@ -51,9 +52,11 @@ export class MatchLiveComponent implements OnInit {
     this.toastyConfig.position = 'top-center';
 
     // this.selectedMoment = new Date();
+    this.first = true;
   }
 
   winnerInterval;
+  expireInterval;
   timeLeft = 0;
   interval;
 
@@ -66,6 +69,11 @@ export class MatchLiveComponent implements OnInit {
     }
     this.interval = setInterval(() => {
       if (this.timeLeft < 90) {
+        if (this.first) {
+          this.first = false;
+        } else {
+          this.first = true;
+        }
         this.value = this.list[this.timeLeft];
         // const ind = this.slist.findIndex(x => x.num === this.value);
         // Enter the number marked into database
@@ -83,13 +91,21 @@ export class MatchLiveComponent implements OnInit {
         // ----------
         this.timeLeft++;
       } else {
-        this.toastyService.info('Game Over !!');
+        this.ExpireMatch();
         this.timeLeft = 0;
         clearInterval(this.interval);
       }
     }, 5000);
   }
 
+  ExpireMatch() {
+    this.expireInterval = setInterval(() => {
+      this._MatchService.ExpireMatch(this.ID).subscribe(data => {
+        this.toastyService.info('Game Over !!');
+        clearInterval(this.expireInterval);
+      });
+    }, 10000);
+  }
 
     getLuckyWinner() {
       this._MatchService.GetLuckyWinner(this.ID).subscribe(

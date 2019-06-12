@@ -120,7 +120,10 @@
                                 bounceIn" style="text-align:center;">
                                 <!-- <h1>{{value}}</h1> -->
                                 <div class="numberCallBlock" *ngIf="value != null">
-                                    <h1 class="numberCall">{{value}}</h1>
+                                    <h1 class="numberCall animated
+                                    bounceIn" *ngIf="first">{{value}}</h1>
+                                    <h1 class="numberCall animated
+                                    bounceIn" *ngIf="!first">{{value}}</h1>
                                 </div>
                                 <h1 *ngIf="checklist.length == 90">All numbers
                                         are marked</h1>

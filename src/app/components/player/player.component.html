@@ -25,50 +25,76 @@
                   <div class="col-md-3">
                       <div class="form-group">
                           <mat-form-field class="example-full-width">
-                              <input required matInput placeholder="Player Name" name="player-name" [(ngModel)]="Player.name"  required [disabled]="Isdisabled" >
+                              <input required matInput placeholder="Player Name" name="player-name" minlength="4" #playerNname="ngModel" [(ngModel)]="Player.name"  required [disabled]="Isdisabled" >
+                              <mat-error class="errors" *ngIf="playerNname.errors && playerNname.touched">
+                                <mat-error *ngIf="playerNname.errors.required">
+                                    Name is <strong>required</strong>
+                                </mat-error>
+                                <mat-error *ngIf="playerNname.errors.minlength">
+                                  Enter your full name
+                              </mat-error>
+                            </mat-error>
                           </mat-form-field>
                       </div>
                   </div>
                   <div class="col-md-3">
                       <div class="form-group">
                           <mat-form-field class="example-full-width">
-                              <input required matInput placeholder="Mobile Number" name="mobile" [(ngModel)]="Player.mobileNumber"  required [disabled]="Isdisabled" >
+                              <input required matInput placeholder="Mobile Number" name="mobile" #mobile="ngModel" maxlength="10" pattern="^(?:(?:\+|0{0,2})91(\s*[\ -]\s*)?|[0]?)?[789]\d{9}|(\d[ -]?){10}\d$" [(ngModel)]="Player.mobileNumber"  required [disabled]="Isdisabled" >
+                              <mat-error class="errors" *ngIf="mobile.errors && mobile.touched">
+                                <mat-error *ngIf="mobile.errors.required">
+                                    Phone No. is <strong>required</strong>
+                                </mat-error>
+                                <mat-error *ngIf="mobile.errors.pattern">
+                                  Please Enter Valid Mobile Number
+                              </mat-error>
+                            </mat-error>
                           </mat-form-field>
                       </div>
                   </div>
                   <div class="col-md-3">
                       <div class="form-group">
                             <mat-form-field class="example-full-width">
-                                <input required matInput placeholder="Email Address" pattern="[a-z0-9!#$%&'*+/=?^_`{|}~.-]+@[a-z0-9-]+(\.[a-z0-9-]+)" type="email" name="emailId" [(ngModel)]="Player.email"  required [disabled]="Isdisabled" >
+                                <input required matInput placeholder="Email Address" pattern="[a-z0-9!#$%&'*+/=?^_`{|}~.-]+@[a-z0-9-]+(\.[a-z0-9-]+)" type="email" #emailId="ngModel" name="emailId" [(ngModel)]="Player.email"  required [disabled]="Isdisabled" >
+                                <!-- <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error> -->
+                                <mat-error *ngIf="emailId.errors && emailId.touched">
+                                    <mat-error *ngIf="emailId.errors.required">
+                                        Email is <strong>required</strong>
+                                    </mat-error>
+                                    <mat-error *ngIf="emailId.errors.pattern">
+                                        Please enter a valid email address
+                                    </mat-error>
+                                </mat-error>
                             </mat-form-field>
-                            <div *ngIf="model.errors && model.touched">
-                                <div *ngIf="model.errors.required" style="color:red">
-                                    Email is <strong>required</strong>
-                                </div>
-                                <div *ngIf="model.errors.pattern" style="color:red">
-                                    Please enter a valid email address
-                                </div>
-                            </div>
+
                       </div>
                   </div>
-                  <div class="col-md-3">
+                  <!-- <div class="col-md-3">
                       <div class="form-group">
                           <mat-form-field class="example-full-width">
-                              <input required matInput placeholder="Password" type="password" name="password" [(ngModel)]="Player.passwordHash"  required [disabled]="Isdisabled" >
+                              <input required matInput placeholder="Password" type="password" minlength="6" name="pass" #pass="ngModel" minlength="6" [(ngModel)]="Player.passwordHash"  required [disabled]="Isdisabled" >
+                              <mat-error *ngIf="pass.errors && pass.touched">
+                                <mat-error *ngIf="pass.errors.required">
+                                    Password is <strong>required</strong>
+                                </mat-error>
+                                <mat-error *ngIf="pass.errors.minlength">
+                                    Minimum length should be 6
+                                </mat-error>
+                            </mat-error>
                           </mat-form-field>
                       </div>
-                  </div>
+                  </div> -->
                   <div class="col-md-3">
                       <div class="form-group">
                           <mat-form-field class="example-full-width">
-                              <textarea required matInput placeholder="Address" name="address" [(ngModel)]="Player.address" matTextareaAutosize matAutosizeMinRows="5" matAutosizeMaxRows="7" required [disabled]="Isdisabled" ></textarea>
+                              <textarea matInput placeholder="Address" name="address" [(ngModel)]="Player.address" matTextareaAutosize matAutosizeMinRows="5" matAutosizeMaxRows="7" [disabled]="Isdisabled" ></textarea>
                           </mat-form-field>
                       </div>
                   </div>
 
               </div>
               <div class="box-footer">
-                  <button type="submit" required [disabled]="!myRatingForm.form.valid || Isdisabled" class="btn btn-primary pull-right md-raised md-primary" mat-raised-button color="primary">Save</button>
+                  <button type="submit" [disabled]="!myRatingForm.form.valid || Isdisabled" required class="btn btn-primary pull-right md-raised md-primary" mat-raised-button color="primary">Save</button>
                   <ng2-toasty></ng2-toasty>
               </div>
           </div>

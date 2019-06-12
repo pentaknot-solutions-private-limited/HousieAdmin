@@ -28,6 +28,7 @@ export class PlayerComponent implements OnInit {
     ID: string;
     Viewname: string;
     Isdisabled: boolean;
+    alldisabled: boolean;
     selectedMoment: any;
 
     // ---------------------Email validation--------------------------//
@@ -100,9 +101,11 @@ export class PlayerComponent implements OnInit {
         }
         if (this.Viewname === 'view') {
             this.Isdisabled = true;
+            this.alldisabled = true;
         }
         if (this.Viewname === 'edit') {
             this.Isdisabled = false;
+            this.alldisabled = true;
         }
         if (this.ID != null) {
             this.loading = true;
